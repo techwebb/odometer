@@ -7,7 +7,7 @@
 </template>
 
 <script>
-module.exports = {
+export default {
   name: 'OdometerDigit',
   props: ['value', 'direction'],
   data() {
@@ -29,9 +29,6 @@ module.exports = {
   watch: {
     value(newValue) {
       if (this.current != newValue) {
-        // console.log('got an update', this.current, newValue);
-        // this.animateDirection = this.direction == 'up' ? {'animation-name':'increment'} : {'animation-name':'increment'};
-        // this.animateDirection = this.direction == 'up' ? 'increment' : 'decrement';
         this.$refs.spinnerEl.classList.add(this.direction == 'up' ? 'increment' : 'decrement');
         this.carryDigits();
       }
@@ -39,6 +36,7 @@ module.exports = {
   },
   methods: {
     endSpin() {
+      let className = null;
       if (this.direction == 'up') {
         this.current = this.spinnerDigits[1];
         className = 'increment';
